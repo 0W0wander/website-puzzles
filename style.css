@@ -1,58 +1,377 @@
 /* Global styles */
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.5;
-  color: #555;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 800;
+body {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e0e0e0;
+  background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #533483 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Animated background particles */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+  animation: backgroundShift 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes backgroundShift {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(-10px) translateY(-10px); }
+  50% { transform: translateX(10px) translateY(-5px); }
+  75% { transform: translateX(-5px) translateY(10px); }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   line-height: 1.2;
-  color: #222;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+a {
+  color: #00d4ff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
 a:hover {
-  color: #0056b3;
-  text-decoration: underline;
+  color: #ff6b6b;
+  text-decoration: none;
+  transform: translateY(-2px);
+  text-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
+}
+
+/* Navbar styles */
+.navbar {
+  background: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand {
+  font-family: 'Orbitron', monospace;
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #00d4ff !important;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+.navbar-nav .nav-link {
+  color: #e0e0e0 !important;
+  font-weight: 500;
+  margin: 0 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00d4ff, #ff6b6b);
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::before {
+  width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #00d4ff !important;
+  transform: translateY(-2px);
 }
 
 /* Header styles */
 header {
-  padding-top: 8rem;
-  padding-bottom: 6rem;
+  padding-top: 10rem;
+  padding-bottom: 8rem;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(255, 107, 107, 0.1));
+  z-index: -1;
 }
 
 header h1 {
-  font-size: 4rem;
+  font-size: 4.5rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, #00d4ff, #ff6b6b, #4ecdc4);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease-in-out infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 header p {
-  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  color: #b0b0b0;
+  margin-bottom: 3rem;
+  font-weight: 300;
+}
+
+.btn {
+  border-radius: 50px;
+  padding: 12px 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  margin: 0 10px;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #00d4ff, #4ecdc4);
+  color: #000;
+  box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.5);
+  background: linear-gradient(45deg, #4ecdc4, #00d4ff);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+/* Ripple effect for buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 
 /* Section styles */
 section {
-  padding: 4rem 0;
+  padding: 6rem 0;
+  position: relative;
 }
 
 section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
+  font-size: 3rem;
+  margin-bottom: 3rem;
+  text-align: center;
+  background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* Footer styles (currently no footer, but i like the black it has) */
+/* Card styles */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.card-title {
+  color: #00d4ff;
+  font-family: 'Orbitron', monospace;
+  font-weight: 700;
+}
+
+.card-text {
+  color: #b0b0b0;
+  font-size: 1.1rem;
+}
+
+.card-footer {
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+}
+
+/* About section */
+#about-me p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: #d0d0d0;
+  text-align: justify;
+}
+
+/* Contact section */
+#contact {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+#contact ul li {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #b0b0b0;
+}
+
+#contact ul li i {
+  color: #00d4ff;
+  margin-right: 10px;
+  font-size: 1.2rem;
+}
+
+/* Footer styles */
 footer {
-  padding: 4rem 0;
-  background-color: #222;
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #000000, #1a1a2e);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 3rem;
+  }
+  
+  header p {
+    font-size: 1.2rem;
+  }
+  
+  section h2 {
+    font-size: 2.5rem;
+  }
+  
+  .btn {
+    margin: 5px;
+    padding: 10px 20px;
+  }
+}
+
+/* Scroll animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00d4ff, #ff6b6b);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #ff6b6b, #00d4ff);
+}
+
+/* Image hover effects */
+img {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Glowing text effect */
+.glow-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+/* Floating animation for cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.card:hover {
+  animation: float 3s ease-in-out infinite;
 }
