@@ -1,251 +1,304 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kevin Wander // Steel-Core Portfolio</title>
+    <meta
+      name="description"
+      content="The steel-core ASCII terminal portfolio of Kevin Wander — computer science major, puzzle builder, and coder."
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="scanline"></div>
+    <div class="noise-overlay"></div>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevs_website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <div class="brushed-steel"></div>
+    <div class="parallax-steel"></div>
+    <div class="steel-glow steel-glow-1"></div>
+    <div class="steel-glow steel-glow-2"></div>
+    <div class="molten-drip" aria-hidden="true">
+      <pre>
+     \
+      \
+       \
+        \
+         \
+      </pre>
+    </div>
 
+    <main class="viewport">
+      <header class="header">
+        <div class="logo-block">
+          <pre class="logo">
+   ██████╗██╗   ██╗██████╗ ███████╗███████╗████████╗███████╗██╗     
+  ██╔════╝██║   ██║██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔════╝██║     
+  ██║     ██║   ██║██████╔╝█████╗  ███████╗   ██║   █████╗  ██║     
+  ██║     ██║   ██║██╔══██╗██╔══╝  ╚════██║   ██║   ██╔══╝  ██║     
+  ╚██████╗╚██████╔╝██║  ██║███████╗███████║   ██║   ███████╗███████╗
+   ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚══════╝╚══════╝
+                  K E V I N   W A N D E R // steel-core portfolio          
+          </pre>
+        </div>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand pl-2" href="#"><b> Kevs website!</b></a>
+        <div class="header-right">
+          <div class="header-badge">
+            <span class="badge-label">PROFILE</span>
+            <span class="badge-value">CS_MAJOR@HUNTER</span>
+          </div>
+          <nav class="nav-chips" aria-label="Section navigation">
+            <button class="chip-link" data-target="about-panel">ABOUT</button>
+            <button class="chip-link" data-target="puzzles-panel">PUZZLES</button>
+            <button class="chip-link" data-target="contact-panel">CONTACT</button>
+          </nav>
+        </div>
+      </header>
 
+      <section class="grid">
+        <!-- Profile / About -->
+        <section class="panel panel-profile" id="about-panel">
+          <div class="panel-header">
+            <span class="title">/profile/kevin.asc</span>
+            <div class="panel-actions">
+              <span class="chip chip-hot">LIVE</span>
+              <span class="chip chip-locked">NYC</span>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="profile-strip">
+              <figure class="profile-frame">
+                <img src="resources/me.jpeg" alt="Photo of Kevin Wander" />
+                <figcaption>Kevin Wander // CS @ Hunter</figcaption>
+              </figure>
+              <figure class="profile-frame">
+                <img
+                  src="resources/hunter-campus.jpg"
+                  alt="Hunter College campus"
+                />
+                <figcaption>Hunter College // NYC</figcaption>
+              </figure>
+            </div>
 
+            <div class="about-description">
+              <p>
+                Welcome! I'm <span class="accent">Kevin Wander</span>, a junior
+                computer science major at Hunter College with a thing for
+                puzzles, clean code, and creative problem-solving.
+              </p>
+              <p>
+                I've worked in <span class="accent">C++</span> and data
+                structures through coursework, and I teach myself
+                <span class="accent">Python</span> and
+                <span class="accent">Kotlin</span> on the side. I love building
+                interactive experiences like the puzzles below and I'm always
+                looking for opportunities to learn, collaborate, and level up.
+              </p>
+            </div>
+          </div>
+        </section>
 
-        <div>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#about-me">About Me</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#puzzle">Puzzles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
+        <!-- Terminal / Identity + Logs -->
+        <section class="panel panel-terminal" id="terminal-panel">
+          <div class="panel-header">
+            <span class="dot red"></span>
+            <span class="dot amber"></span>
+            <span class="dot green"></span>
+            <span class="title">/terminal/kevin.log</span>
+          </div>
+          <div class="panel-body">
+            <div class="terminal-line">
+              <span class="prompt">kevin@steel-core</span>
+              <span class="chevron">≫</span>
+              <span class="cmd">cat about_kevin.asc</span>
+            </div>
+            <div class="terminal-stream" id="terminal-stream">
+              <pre class="ascii-art" id="ascii-art">
+        .-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.
+        |   K E V I N   W A N D E R           |
+ .-===-.|-------------------------------------|.-===-.
+ |   \  |  CS @ HUNTER  //  C++, PYTHON,     |  /   |
+ |    \ |  KOTLIN, DATA STRUCTURES, PUZZLES  | /    |
+ |     \|  BUILDING INTERACTIVE EXPERIENCES  |/     |
+ |   steel-core focus // curious // driven   |      |
+ '-==========================================-'
+              </pre>
+              <div class="terminal-line faint">
+                [ boot ] wiring profile into steel-core shell...
+              </div>
+              <div class="terminal-line faint">
+                [ ok ] mounted /puzzles at ./tic-tac-toe and ./2048
+              </div>
+              <div class="terminal-line faint">
+                [ ok ] loading hunter-campus context + personal glyph...
+              </div>
+            </div>
+            <div class="terminal-line caret-line">
+              <span class="prompt">kevin@steel-core</span>
+              <span class="chevron">≫</span>
+              <span class="caret" aria-hidden="true"></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Projects / Commands -->
+        <section class="panel panel-tracks" id="puzzles-panel">
+          <div class="panel-header">
+            <span class="title">/commands/projects.asc</span>
+          </div>
+          <div class="panel-body tracks">
+            <button class="track" data-energy="INFO" data-role="about">
+              <span class="track-index">00</span>
+              <span class="track-name">"about kevin // core dump"</span>
+              <span class="track-meta">
+                stream background, skills, and goals into terminal
+              </span>
+              <span class="track-energy">ABOUT</span>
+            </button>
+            <button
+              class="track"
+              data-energy="MID"
+              data-link="tic-tac-toe/index.html"
+              data-cmd="open ./tic-tac-toe/index.html --mode head-to-head"
+            >
+              <span class="track-index">01</span>
+              <span class="track-name">"head-to-head tic tac toe"</span>
+              <span class="track-meta">
+                3 pieces per player // oldest piece respawns
+              </span>
+              <span class="track-energy">PROJECT</span>
+            </button>
+            <button
+              class="track"
+              data-energy="HIGH"
+              data-link="2048/index.html"
+              data-cmd="open ./2048/index.html --variant down-right"
+            >
+              <span class="track-index">02</span>
+              <span class="track-name">"2048 — down-right edition"</span>
+              <span class="track-meta">
+                merge tiles to reach 2048 // directional twist
+              </span>
+              <span class="track-energy">PROJECT</span>
+            </button>
+            <button
+              class="track"
+              data-energy="LOW"
+              data-link="steelcore.html"
+              data-cmd="open ./steelcore.html --profile steel-core"
+            >
+              <span class="track-index">03</span>
+              <span class="track-name">"wicked ascii steel-core"</span>
+              <span class="track-meta">
+                original forge terminal // ambient vibes
+              </span>
+              <span class="track-energy">ATMOS</span>
+            </button>
+            <button class="track" data-energy="MAX">
+              <span class="track-index">04</span>
+              <span class="track-name">"&lt;slot open&gt; future project"</span>
+              <span class="track-meta">
+                your project here // internship / collab?
+              </span>
+              <span class="track-energy">OPEN</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Controls + Contact -->
+        <section class="panel panel-console" id="contact-panel">
+          <div class="panel-header">
+            <span class="title">/controls/contact.cfg</span>
+          </div>
+          <div class="panel-body console-body">
+            <label class="slider-label">
+              <span>SPARK DENSITY</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="40"
+                id="spark-density"
+              />
+            </label>
+            <label class="slider-label">
+              <span>NOISE LEVEL</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="35"
+                id="noise-level"
+              />
+            </label>
+            <label class="slider-label">
+              <span>GLITCH INTENSITY</span>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                id="glitch-intensity"
+              />
+            </label>
+
+            <div class="console-row">
+              <button class="btn ghost" id="pulse-btn">
+                <span>> pulse_puzzles</span>
+              </button>
+              <button class="btn ghost" id="scramble-btn">
+                <span>> scramble_identity</span>
+              </button>
+            </div>
+
+            <ul class="contact-list">
+              <li>
+                <span class="contact-label">email</span>
+                <a href="mailto:kwander31@gmail.com">kwander31@gmail.com</a>
+              </li>
+              <li>
+                <span class="contact-label">phone</span>
+                <span>(646) 920-0905</span>
+              </li>
+              <li>
+                <span class="contact-label">location</span>
+                <span>New York, NY</span>
+              </li>
+              <li>
+                <span class="contact-label">linkedin</span>
+                <a
+                  href="https://www.linkedin.com/in/kevin-wander-76a809192/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >/in/kevin-wander-76a809192/</a
+                >
+              </li>
+              <li>
+                <span class="contact-label">github</span>
+                <a
+                  href="https://github.com/Kwander"
+                  target="_blank"
+                  rel="noreferrer"
+                  >github.com/Kwander</a
+                >
+              </li>
             </ul>
-        </div>
-    </nav>
+          </div>
+        </section>
+      </section>
 
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h1>Kevin Wander</h1>
-                    <p class="lead">Computer Science Major</p>
-                    <a href="https://www.linkedin.com/in/kevin-wander-76a809192/"
-                        class="btn btn-primary btn-lg">LinkedIn</a>
-                    <a href="https://github.com/Kwander" class="btn btn-primary btn-lg">Github</a>
-                </div>
-                <div class="col-md-6">
-                    <img src="resources/me.jpeg" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </header>
+      <footer class="footer">
+        <span class="footer-text">
+          <span class="blip"></span>
+          <span>status:</span>
+          <span id="status-line">core idle // portfolio ready</span>
+        </span>
+        <span class="footer-text">
+          <span>&lt;ascii/steel&gt; portfolio forged by Kevin Wander.</span>
+        </span>
+      </footer>
+    </main>
 
-    <section id="about-me">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>About Me</h2>
-                    <p style="font-size:22px;">
-                        Welcome to my website! My name is Kevin Wander, and I'm a junior computer science major at
-                        Hunter College. I'm a dedicated and motivated individual with a passion for technology &
-                        programming.
-
-                        I've been committed to excellence in my academic career & I am seeking opportunities to expand
-                        my knowledge. At hunter I've been taught C++ & data structure and I have learned python &
-                        Kotlin on my own time. Finding creative solutions to technical challenges sounds very
-                        interesting and
-                        I would love to collaborate effectively with colleagues on group
-                        projects. Please take a look & feel free to contact me if you have any questions.
-                    </p>
-                </div>
-                <div class="col-md-6">
-                    <img src="resources/hunter-campus.jpg" alt="Coding photo" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section id="puzzle">
-        <div class="container">
-            <h2>Fun puzzles</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Head to Head Tic Tac Toe</h5>
-                            <p class="card-text">Tic-tac-toe Variant: only 3 pieces per player, and your oldest piece gets replaced!</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="tic-tac-toe/index.html" class="btn btn-primary">View</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">2048</h5>
-                            <p class="card-text">Merge tiles to create the 2048 tile! (down right)
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="2048/index.html" class="btn btn-primary">Play</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Sudoku</h5>
-                            <p class="card-text">A Sudoku game to challenge your mind!</p>
-                        </div>
-                        <div class="card-footer">
-                            <a href="sudoku/index.html" class="btn btn-primary">Play</a>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <p>Feel free to contact me for any questions or collaboration opportunities.</p>
-                    <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope"></i> kwander31@gmail.com</li>
-                        <li><i class="fa fa-phone"></i> (646) 920-0905</li>
-                        <li><i class="fa fa-map-marker"></i> New York, NY</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <!-- Nothing in footer for now, I guess. -->
-        </div>
-    </footer>
-
-    <script>
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        // Observe all sections and cards
-        document.querySelectorAll('section, .card').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 212, 255, 0.2)';
-            } else {
-                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
-                navbar.style.boxShadow = 'none';
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add hover effects to images
-        document.querySelectorAll('img').forEach(img => {
-            img.style.transition = 'transform 0.3s ease, filter 0.3s ease';
-            img.addEventListener('mouseenter', () => {
-                img.style.transform = 'scale(1.05)';
-                img.style.filter = 'brightness(1.1) contrast(1.1)';
-            });
-            img.addEventListener('mouseleave', () => {
-                img.style.transform = 'scale(1)';
-                img.style.filter = 'brightness(1) contrast(1)';
-            });
-        });
-
-        // Add typing effect to the main title
-        const title = document.querySelector('header h1');
-        const originalText = title.textContent;
-        title.textContent = '';
-        let i = 0;
-
-        function typeWriter() {
-            if (i < originalText.length) {
-                title.textContent += originalText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-
-        // Start typing effect when page loads
-        window.addEventListener('load', () => {
-            setTimeout(typeWriter, 500);
-        });
-
-        // Add particle effect to buttons
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
-    </script>
-
-</body>
-
+    <script src="script.js"></script>
+  </body>
 </html>
