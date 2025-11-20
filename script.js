@@ -23,6 +23,11 @@ const logQueue = [
   "scanning: opportunities for internships & collabs",
 ];
 
+function scrollTerminalToBottom() {
+  if (!terminalStream) return;
+  terminalStream.scrollTop = terminalStream.scrollHeight;
+}
+
 function appendLog(line, opts = {}) {
   if (!terminalStream) return;
   const el = document.createElement("div");
@@ -30,7 +35,7 @@ function appendLog(line, opts = {}) {
   if (opts.faint) el.classList.add("faint");
   el.textContent = `[ ${new Date().toLocaleTimeString()} ] ${line}`;
   terminalStream.appendChild(el);
-  terminalStream.scrollTop = terminalStream.scrollHeight;
+  scrollTerminalToBottom();
 }
 
 function setStatus(text) {
@@ -157,7 +162,7 @@ function printCommandToTerminal(commandText) {
   line.appendChild(cmdSpan);
 
   terminalStream.appendChild(line);
-  terminalStream.scrollTop = terminalStream.scrollHeight;
+  scrollTerminalToBottom();
 }
 
 function wireTracks() {
@@ -219,4 +224,77 @@ updateSparkDensity();
 updateNoise();
 updateGlitchIntensity();
 
+scrollTerminalToBottom();
 
+function setupProfileHoverPopout() {
+  const frames = qsa(".profile-frame");
+  if (!frames.length) return;
+
+  let popover;
+  let popoverImg;
+  let popoverCaption;
+
+  function ensurePopover() {
+    if (popover) return;
+    popover = document.createElement("figure");
+    popover.className = "profile-popover";
+
+    const inner = document.createElement("div");
+    inner.className = "profile-popover-inner";
+
+    popoverImg = document.createElement("img");
+    popoverCaption = document.createElement("figcaption");
+
+    inner.appendChild(popoverImg);
+    inner.appendChild(popoverCaption);
+    popover.appendChild(inner);
+    document.body.appendChild(popover);
+  }
+
+  frames.forEach((frame) => {
+    frame.addEventListener("mouseenter", () => {
+      const img = frame.querySelector("img");
+      const caption = frame.querySelector("figcaption");
+      if (!img) return;
+
+      ensurePopover();
+
+      popoverImg.src = img.src;
+      popoverImg.alt = img.alt || "";
+      popoverCaption.textContent = caption?.textContent ?? "";
+
+      const rect = frame.getBoundingClientRect();
+      const margin = 16;
+      const estimatedWidth = 320;
+      const estimatedHeight = 360;
+
+      let top = rect.top;
+      let left = rect.right + margin;
+
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      if (left + estimatedWidth > vw - margin) {
+        left = rect.left - estimatedWidth - margin;
+      }
+
+      if (top + estimatedHeight > vh - margin) {
+        top = vh - estimatedHeight - margin;
+      }
+
+      if (top < margin) top = margin;
+
+      popover.style.top = `${top}px`;
+      popover.style.left = `${left}px`;
+      popover.classList.add("visible");
+    });
+
+    frame.addEventListener("mouseleave", () => {
+      if (popover) {
+        popover.classList.remove("visible");
+      }
+    });
+  });
+}
+
+setupProfileHoverPopout();
