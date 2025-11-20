@@ -11,6 +11,10 @@ const terminalStream = qs("#terminal-stream");
 const asciiArt = qs("#ascii-art");
 const noiseOverlay = qs(".noise-overlay");
 const navChips = qsa(".chip-link");
+const gridRoot = qs(".grid");
+const logoBlock = qs(".logo-block");
+const aboutPanel = qs("#about-panel");
+const contactPanel = qs("#contact-panel");
 
 const baseAscii = asciiArt ? String(asciiArt.textContent) : "";
 
@@ -165,6 +169,80 @@ function printCommandToTerminal(commandText) {
   scrollTerminalToBottom();
 }
 
+// --- Left-column overlay panel (for contact, etc.) ---
+let leftColumnOverlay = null;
+
+function ensureLeftColumnOverlay() {
+  if (leftColumnOverlay || !gridRoot) return leftColumnOverlay;
+
+  leftColumnOverlay = document.createElement("section");
+  leftColumnOverlay.className = "panel left-column-overlay";
+
+  const header = document.createElement("div");
+  header.className = "panel-header";
+
+  const title = document.createElement("span");
+  title.className = "title";
+  title.textContent = "/overlay/contact.asc";
+
+  const closeBtn = document.createElement("button");
+  closeBtn.type = "button";
+  closeBtn.className = "btn ghost";
+  closeBtn.style.fontSize = "0.6rem";
+  closeBtn.textContent = "CLOSE";
+
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+
+  const body = document.createElement("div");
+  body.className = "panel-body";
+
+  // Reuse the existing contact list markup for consistency
+  const sourceContactList = contactPanel?.querySelector(".contact-list");
+  if (sourceContactList) {
+    const clonedList = sourceContactList.cloneNode(true);
+    body.appendChild(clonedList);
+  } else {
+    const fallback = document.createElement("p");
+    fallback.textContent = "opening contact channel...";
+    body.appendChild(fallback);
+  }
+
+  leftColumnOverlay.appendChild(header);
+  leftColumnOverlay.appendChild(body);
+
+  // Insert overlay as first child in grid (before logo-block)
+  if (logoBlock) {
+    gridRoot.insertBefore(leftColumnOverlay, logoBlock);
+  } else {
+    gridRoot.appendChild(leftColumnOverlay);
+  }
+
+  closeBtn.addEventListener("click", () => {
+    hideLeftColumnOverlay();
+  });
+
+  return leftColumnOverlay;
+}
+
+function showLeftColumnOverlay() {
+  if (!gridRoot || !logoBlock || !aboutPanel || !contactPanel) return;
+
+  ensureLeftColumnOverlay();
+  if (!leftColumnOverlay) return;
+
+  // Trigger layout so transitions apply cleanly
+  void leftColumnOverlay.offsetHeight;
+
+  leftColumnOverlay.classList.add("visible");
+}
+
+function hideLeftColumnOverlay() {
+  if (!leftColumnOverlay) return;
+
+  leftColumnOverlay.classList.remove("visible");
+}
+
 function wireTracks() {
   qsa(".track").forEach((track) => {
     const role = track.dataset.role;
@@ -175,7 +253,17 @@ function wireTracks() {
       track.addEventListener("click", () => {
         qsa(".track").forEach((t) => t.classList.remove("active"));
         track.classList.add("active");
+        hideLeftColumnOverlay();
         igniteCore();
+      });
+      return;
+    }
+
+    if (role === "contact") {
+      track.addEventListener("click", () => {
+        qsa(".track").forEach((t) => t.classList.remove("active"));
+        track.classList.add("active");
+        showLeftColumnOverlay();
       });
       return;
     }
