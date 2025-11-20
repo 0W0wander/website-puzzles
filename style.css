@@ -256,6 +256,9 @@ body.core-ignited .steel-glow {
   box-shadow: inset 0 0 0 1px rgba(132, 142, 192, 0.5), var(--shadow-soft);
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-block::after {
@@ -280,6 +283,9 @@ body.core-ignited .steel-glow {
   text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   white-space: pre;
   animation: asciiFlicker 2.8s steps(18, end) infinite;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 .header-right {
