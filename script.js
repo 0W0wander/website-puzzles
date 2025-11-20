@@ -204,6 +204,8 @@ function wireNavChips() {
       if (!targetId) return;
       const panel = document.getElementById(targetId);
       if (!panel) return;
+      navChips.forEach((c) => c.classList.remove("active"));
+      chip.classList.add("active");
       panel.scrollIntoView({ behavior: "smooth", block: "center" });
       mildGlitch(180);
     });
@@ -219,6 +221,11 @@ glitchSlider?.addEventListener("input", updateGlitchIntensity);
 
 wireTracks();
 wireNavChips();
+
+// Default active nav item
+if (navChips.length) {
+  navChips[0].classList.add("active");
+}
 
 updateSparkDensity();
 updateNoise();

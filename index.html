@@ -20,35 +20,66 @@
     <div class="steel-glow steel-glow-2"></div>
 
     <main class="viewport">
-      <header class="header">
-        <div class="logo-block">
-          <pre class="logo">
-            █████   ████                       ███                █████   ███   █████                          █████                   
-            ▒▒███   ███▒                       ▒▒▒                ▒▒███   ▒███  ▒▒███                          ▒▒███                    
-             ▒███  ███     ██████  █████ █████ ████  ████████      ▒███   ▒███   ▒███   ██████   ████████    ███████   ██████  ████████ 
-             ▒███████     ███▒▒███▒▒███ ▒▒███ ▒▒███ ▒▒███▒▒███     ▒███   ▒███   ▒███  ▒▒▒▒▒███ ▒▒███▒▒███  ███▒▒███  ███▒▒███▒▒███▒▒███
-             ▒███▒▒███   ▒███████  ▒███  ▒███  ▒███  ▒███ ▒███     ▒▒███  █████  ███    ███████  ▒███ ▒███ ▒███ ▒███ ▒███████  ▒███ ▒▒▒ 
-             ▒███ ▒▒███  ▒███▒▒▒   ▒▒███ ███   ▒███  ▒███ ▒███      ▒▒▒█████▒█████▒    ███▒▒███  ▒███ ▒███ ▒███ ▒███ ▒███▒▒▒   ▒███     
-             █████ ▒▒████▒▒██████   ▒▒█████    █████ ████ █████       ▒▒███ ▒▒███     ▒▒████████ ████ █████▒▒████████▒▒██████  █████    
-            ▒▒▒▒▒   ▒▒▒▒  ▒▒▒▒▒▒     ▒▒▒▒▒    ▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒         ▒▒▒   ▒▒▒       ▒▒▒▒▒▒▒▒ ▒▒▒▒ ▒▒▒▒▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒  ▒▒▒▒▒   
-                K E V I N   W A N D E R // steel-core portfolio
-          </pre>
-        </div>
-
-        <div class="header-right">
-          <div class="header-badge">
-            <span class="badge-label">PROFILE</span>
-            <span class="badge-value">CS_MAJOR@HUNTER</span>
+      <header class="header" role="banner">
+        <div class="nav-shell">
+          <div class="nav-ascii-row nav-ascii-top" aria-hidden="true">
+            <span class="nav-ascii-corner">┌</span>
+            <span class="nav-wire"></span>
+            <span class="nav-ascii-label">steel-core // navigation bus</span>
+            <span class="nav-wire"></span>
+            <span class="nav-ascii-corner">┐</span>
           </div>
-          <nav class="nav-chips" aria-label="Section navigation">
-            <button class="chip-link" data-target="about-panel">ABOUT</button>
-            <button class="chip-link" data-target="puzzles-panel">PUZZLES</button>
-            <button class="chip-link" data-target="contact-panel">CONTACT</button>
+
+          <nav class="nav-rail" aria-label="Primary navigation">
+            <div class="nav-rail-left">
+              <span class="nav-brand">
+                KEVIN<span class="nav-brand-sub">// steel-core</span>
+              </span>
+              <span class="nav-pill">CS_MAJOR@HUNTER</span>
+            </div>
+
+            <div class="nav-rail-center nav-chips">
+              <button class="chip-link nav-link" data-target="about-panel">
+                <span class="nav-link-label">ABOUT</span>
+              </button>
+              <button class="chip-link nav-link" data-target="puzzles-panel">
+                <span class="nav-link-label">PUZZLES</span>
+              </button>
+              <button class="chip-link nav-link" data-target="contact-panel">
+                <span class="nav-link-label">CONTACT</span>
+              </button>
+            </div>
+
+            <div class="nav-rail-right">
+              <span class="nav-route">
+                [ route: /profile → /projects → /contact ]
+              </span>
+            </div>
           </nav>
+
+          <div class="nav-ascii-row nav-ascii-bottom" aria-hidden="true">
+            <span class="nav-ascii-corner">└</span>
+            <span class="nav-wire"></span>
+            <span class="nav-ascii-label">header online // panels linked</span>
+            <span class="nav-wire"></span>
+            <span class="nav-ascii-corner">┘</span>
+          </div>
         </div>
       </header>
 
       <section class="grid">
+        <div class="logo-block">
+          <pre class="logo">
+    ██╗  ██╗███████╗██╗   ██╗██╗███╗   ██╗    ██╗    ██╗ █████╗ ███╗   ██╗██████╗ ███████╗██████╗ 
+    ██║ ██╔╝██╔════╝██║   ██║██║████╗  ██║    ██║    ██║██╔══██╗████╗  ██║██╔══██╗██╔════╝██╔══██╗
+    █████╔╝ █████╗  ██║   ██║██║██╔██╗ ██║    ██║ █╗ ██║███████║██╔██╗ ██║██║  ██║█████╗  ██████╔╝
+    ██╔═██╗ ██╔══╝  ╚██╗ ██╔╝██║██║╚██╗██║    ██║███╗██║██╔══██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗
+    ██║  ██╗███████╗ ╚████╔╝ ██║██║ ╚████║    ╚███╔███╔╝██║  ██║██║ ╚████║██████╔╝███████╗██║  ██║
+    ╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚═╝╚═╝  ╚═══╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+        K E V I N   W A N D E R // steel-core portfolio
+          </pre>
+        </div>
+
         <!-- Profile / About -->
         <section class="panel panel-profile" id="about-panel">
           <div class="panel-header">
@@ -187,46 +218,6 @@
             <span class="title">/controls/contact.cfg</span>
           </div>
           <div class="panel-body console-body">
-            <label class="slider-label">
-              <span>SPARK DENSITY</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="40"
-                id="spark-density"
-              />
-            </label>
-            <label class="slider-label">
-              <span>NOISE LEVEL</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="35"
-                id="noise-level"
-              />
-            </label>
-            <label class="slider-label">
-              <span>GLITCH INTENSITY</span>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                id="glitch-intensity"
-              />
-            </label>
-
-            <div class="console-row">
-              <button class="btn ghost" id="pulse-btn">
-                <span>> pulse_puzzles</span>
-              </button>
-              <button class="btn ghost" id="scramble-btn">
-                <span>> scramble_identity</span>
-              </button>
-            </div>
-
             <ul class="contact-list">
               <li>
                 <span class="contact-label">email</span>

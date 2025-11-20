@@ -142,9 +142,110 @@ body.core-ignited .steel-glow {
 
 .header {
   display: flex;
-  gap: 1rem;
-  align-items: flex-start;
+  align-items: stretch;
+  justify-content: center;
+  margin-bottom: 0.1rem;
+}
+
+.nav-shell {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-ascii-row {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--steel-soft);
+  opacity: 0.9;
+}
+
+.nav-ascii-corner {
+  font-size: 0.8rem;
+  color: var(--steel);
+  text-shadow: 0 0 6px rgba(156, 163, 255, 0.8);
+}
+
+.nav-ascii-label {
+  white-space: nowrap;
+}
+
+.nav-wire {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(129, 140, 248, 0.6),
+    rgba(255, 75, 129, 0.85)
+  );
+  box-shadow: 0 0 8px rgba(99, 102, 241, 0.9);
+}
+
+.nav-rail {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: radial-gradient(circle at top, #191d35, #050609 70%);
+  border: 1px solid rgba(152, 162, 255, 0.9);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.9),
+    0 0 22px rgba(129, 140, 248, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+.nav-rail-left,
+.nav-rail-center,
+.nav-rail-right {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.nav-rail-left {
+  min-width: 0;
+}
+
+.nav-rail-center {
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-rail-right {
+  min-width: 0;
+  justify-content: flex-end;
+}
+
+.nav-brand {
+  font-weight: 600;
+  color: var(--steel);
+  white-space: nowrap;
+}
+
+.nav-brand-sub {
+  margin-left: 0.3rem;
+  color: var(--accent-soft);
+}
+
+.nav-pill {
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 255, 0.9);
+  background: radial-gradient(circle at top, #232742, #111322 70%);
+  color: var(--accent-soft);
+  font-size: 0.63rem;
+}
+
+.nav-route {
+  font-size: 0.6rem;
+  color: #8b92c3;
+  white-space: nowrap;
 }
 
 .logo-block {
@@ -213,8 +314,6 @@ body.core-ignited .steel-glow {
 .nav-chips {
   display: flex;
   gap: 0.35rem;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
 }
 
 .chip-link {
@@ -229,6 +328,62 @@ body.core-ignited .steel-glow {
   text-transform: uppercase;
   transition: background 140ms ease, color 140ms ease, box-shadow 140ms ease,
     transform 120ms ease;
+}
+
+.nav-link {
+  position: relative;
+  overflow: hidden;
+  padding-inline: 0.9rem;
+  font-size: 0.65rem;
+  border-color: rgba(132, 142, 192, 0.9);
+  background: rgba(7, 10, 22, 0.92);
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at top,
+    rgba(165, 180, 252, 0.8),
+    transparent 55%
+  );
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 140ms ease;
+}
+
+.nav-link .nav-link-label {
+  position: relative;
+  z-index: 1;
+}
+
+.chip-link:hover {
+  background: rgba(28, 32, 60, 0.98);
+  color: var(--steel);
+  box-shadow: 0 0 10px rgba(98, 112, 255, 0.7);
+  transform: translateY(-1px);
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+}
+
+.chip-link:active {
+  transform: translateY(0);
+  box-shadow: 0 0 6px rgba(98, 112, 255, 0.7);
+}
+
+.chip-link.active,
+.nav-link.active {
+  background: linear-gradient(
+    90deg,
+    rgba(129, 140, 248, 1),
+    rgba(255, 75, 129, 1)
+  );
+  color: #f9fafb;
+  border-color: transparent;
+  box-shadow: 0 0 18px rgba(129, 140, 248, 0.95);
 }
 
 .chip-link:hover {
@@ -298,7 +453,7 @@ body.core-ignited .steel-glow {
   flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-  grid-template-rows: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-rows: auto auto auto;
   gap: 0.9rem;
 }
 
@@ -398,22 +553,23 @@ body.core-ignited .steel-glow {
 
 #about-panel {
   grid-column: 1;
-  grid-row: 1;
+  grid-row: 2;
 }
 
 #terminal-panel {
   grid-column: 2;
-  grid-row: 1;
+  grid-row: 1 / span 2;
 }
 
 #puzzles-panel {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 3;
 }
 
 #contact-panel {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 3;
+  align-self: start; /* don't stretch to full row height */
 }
 
 .dot {
@@ -983,6 +1139,21 @@ body.glitch {
   .nav-chips {
     justify-content: flex-start;
     flex-wrap: wrap;
+  }
+
+  .nav-rail {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.4rem;
+  }
+
+  .nav-rail-center {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .nav-route {
+    white-space: normal;
   }
 
   .profile-strip {
