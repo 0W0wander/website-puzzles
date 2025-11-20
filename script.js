@@ -12,6 +12,7 @@ const asciiArt = qs("#ascii-art");
 const noiseOverlay = qs(".noise-overlay");
 const navChips = qsa(".chip-link");
 const gridRoot = qs(".grid");
+const leftColumn = qs(".grid-left-column");
 const logoBlock = qs(".logo-block");
 const aboutPanel = qs("#about-panel");
 const contactPanel = qs("#contact-panel");
@@ -173,7 +174,7 @@ function printCommandToTerminal(commandText) {
 let leftColumnOverlay = null;
 
 function ensureLeftColumnOverlay() {
-  if (leftColumnOverlay || !gridRoot) return leftColumnOverlay;
+  if (leftColumnOverlay || !leftColumn) return leftColumnOverlay;
 
   leftColumnOverlay = document.createElement("section");
   leftColumnOverlay.className = "panel left-column-overlay";
@@ -211,12 +212,8 @@ function ensureLeftColumnOverlay() {
   leftColumnOverlay.appendChild(header);
   leftColumnOverlay.appendChild(body);
 
-  // Insert overlay as first child in grid (before logo-block)
-  if (logoBlock) {
-    gridRoot.insertBefore(leftColumnOverlay, logoBlock);
-  } else {
-    gridRoot.appendChild(leftColumnOverlay);
-  }
+  // Prepend to left column (will appear first due to order: -1)
+  leftColumn.prepend(leftColumnOverlay);
 
   closeBtn.addEventListener("click", () => {
     hideLeftColumnOverlay();
@@ -226,7 +223,7 @@ function ensureLeftColumnOverlay() {
 }
 
 function showLeftColumnOverlay() {
-  if (!gridRoot || !logoBlock || !aboutPanel || !contactPanel) return;
+  if (!leftColumn) return;
 
   ensureLeftColumnOverlay();
   if (!leftColumnOverlay) return;
