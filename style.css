@@ -525,6 +525,11 @@ body.core-ignited .steel-glow {
   transition: transform 200ms ease;
 }
 
+/* Make main profile image feel clickable */
+#profile-photo {
+  cursor: pointer;
+}
+
 .profile-frame figcaption {
   padding: 0.3rem 0.4rem;
   font-size: 0.62rem;
@@ -988,5 +993,15 @@ body.glitch {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.2rem;
+  }
+}
+
+/* On large monitors, let the main panels breathe:
+   keep a consistent 65px margin from the window edges */
+@media (min-width: 1300px) {
+  .viewport {
+    max-width: none;
+    padding-left: 65px;
+    padding-right: 65px;
   }
 }

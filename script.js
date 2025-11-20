@@ -298,3 +298,22 @@ function setupProfileHoverPopout() {
 }
 
 setupProfileHoverPopout();
+
+// Toggle profile photo between two versions on click
+const profilePhoto = qs("#profile-photo");
+if (profilePhoto) {
+  const jpegSrc = "resources/me.jpeg";
+  const jpgSrc = "resources/me.jpg";
+
+  profilePhoto.addEventListener("click", () => {
+    const current = profilePhoto.getAttribute("src") || "";
+    const nextSrc = current.endsWith("me.jpg") ? jpegSrc : jpgSrc;
+    profilePhoto.setAttribute("src", nextSrc);
+
+    // If the hover popover is open, keep it in sync with the new image
+    const popoverImgEl = document.querySelector(".profile-popover img");
+    if (popoverImgEl) {
+      popoverImgEl.setAttribute("src", nextSrc);
+    }
+  });
+}
