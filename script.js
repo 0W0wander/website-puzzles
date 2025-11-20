@@ -21,12 +21,12 @@ const projectVaultPanel = qs("#projects-vault-panel");
 const baseAscii = asciiArt ? String(asciiArt.textContent) : "";
 
 const logQueue = [
-  "forging profile: KEVIN_WANDER.asc",
-  "binding: CS major @ Hunter College // NYC",
-  "languages loaded: C++, Python, Kotlin",
-  "skills mounted: data structures, problem solving, collaboration",
-  "injecting: interactive puzzles (tic-tac-toe, 2048, ascii forge)",
-  "scanning: opportunities for internships & collabs",
+  "loading profile: KEVIN_WANDER",
+  "education: B.A. Computer Science @ Hunter College (CUNY) // NYC",
+  "languages: Python, C++, Kotlin, JavaScript, SQL",
+  "projects: media tagger, stock analytics app, Roblox extension",
+  "experience: NYC DOE OPT, RK Blueprints, MTA IT",
+  "open to: software engineering & data-focused roles",
 ];
 
 function scrollTerminalToBottom() {
@@ -53,8 +53,8 @@ function igniteCore() {
     terminalStream.innerHTML = "";
   }
   document.body.classList.add("core-ignited");
-  setStatus("core online // portfolio humming");
-  appendLog("IGNITION accepted. Bringing Kevin's steel-core online...", {
+  setStatus("portfolio online // ready to explore");
+  appendLog("IGNITION accepted. Bringing Kevin's portfolio online...", {
     faint: false,
   });
 
@@ -153,7 +153,7 @@ function printCommandToTerminal(commandText) {
 
   const promptSpan = document.createElement("span");
   promptSpan.className = "prompt";
-  promptSpan.textContent = "kevin@steel-core";
+  promptSpan.textContent = "kevin@portfolio";
 
   const chevronSpan = document.createElement("span");
   chevronSpan.className = "chevron";
