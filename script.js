@@ -16,6 +16,7 @@ const leftColumn = qs(".grid-left-column");
 const logoBlock = qs(".logo-block");
 const aboutPanel = qs("#about-panel");
 const contactPanel = qs("#contact-panel");
+const projectVaultPanel = qs("#projects-vault-panel");
 
 const baseAscii = asciiArt ? String(asciiArt.textContent) : "";
 
@@ -297,6 +298,126 @@ function wireNavChips() {
   });
 }
 
+// --- Project Vault wiring ---
+
+function wireProjectVault() {
+  if (!projectVaultPanel) return;
+
+  const template = document.getElementById("vault-projects-template");
+  if (!template) return;
+
+  const projectNodes = Array.from(
+    template.content.querySelectorAll("[data-link]")
+  );
+  if (!projectNodes.length) return;
+
+  const projects = projectNodes.map((node) => ({
+    index: node.dataset.index || "",
+    title: node.dataset.title || "",
+    tagline: node.dataset.tagline || "",
+    blurb: node.dataset.blurb || "",
+    difficulty: node.dataset.difficulty || "",
+    tech: node.dataset.tech || "",
+    link: node.dataset.link || "",
+    cmd: node.dataset.cmd || "",
+  }));
+
+  const feature = projectVaultPanel.querySelector(".vault-feature");
+  const indexEl = feature?.querySelector(".vault-feature-index");
+  const titleEl = feature?.querySelector(".vault-feature-title");
+  const taglineEl = feature?.querySelector(".vault-feature-tagline");
+  const blurbEl = feature?.querySelector(".vault-feature-blurb");
+  const metaDifficultyEl = feature?.querySelector(
+    ".vault-chip:nth-child(1) .vault-chip-value"
+  );
+  const metaTechEl = feature?.querySelector(
+    ".vault-chip:nth-child(2) .vault-chip-value"
+  );
+  const pathEl = feature?.querySelector(".vault-footer-path");
+  const openBtn = feature?.querySelector(".vault-open-btn");
+  const leftArrow = projectVaultPanel.querySelector(".vault-arrow-left");
+  const rightArrow = projectVaultPanel.querySelector(".vault-arrow-right");
+  const dotsContainer = projectVaultPanel.querySelector(".vault-dots");
+
+  if (
+    !feature ||
+    !indexEl ||
+    !titleEl ||
+    !taglineEl ||
+    !blurbEl ||
+    !metaDifficultyEl ||
+    !metaTechEl ||
+    !pathEl ||
+    !openBtn ||
+    !leftArrow ||
+    !rightArrow ||
+    !dotsContainer
+  ) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  function renderProject(idx) {
+    const project = projects[idx];
+    if (!project) return;
+
+    indexEl.textContent = project.index;
+    titleEl.textContent = project.title;
+    taglineEl.textContent = project.tagline;
+    blurbEl.textContent = project.blurb;
+    metaDifficultyEl.textContent = project.difficulty;
+    metaTechEl.textContent = project.tech;
+    pathEl.textContent = project.link ? `./${project.link}` : "";
+
+    openBtn.onclick = () => {
+      if (project.cmd) {
+        printCommandToTerminal(project.cmd);
+      }
+      if (project.link) {
+        setTimeout(() => {
+          window.location.href = project.link;
+        }, 420);
+      }
+    };
+
+    Array.from(dotsContainer.children).forEach((dot, dotIdx) => {
+      dot.classList.toggle("active", dotIdx === idx);
+      dot.setAttribute("aria-selected", dotIdx === idx ? "true" : "false");
+    });
+  }
+
+  // Build dots
+  projects.forEach((project, idx) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "vault-dot";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", project.title || `Project ${project.index}`);
+    dot.addEventListener("click", () => {
+      currentIndex = idx;
+      renderProject(currentIndex);
+      mildGlitch(160);
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  leftArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+    renderProject(currentIndex);
+    mildGlitch(160);
+  });
+
+  rightArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % projects.length;
+    renderProject(currentIndex);
+    mildGlitch(160);
+  });
+
+  // Initial render
+  renderProject(currentIndex);
+}
+
 pulseBtn?.addEventListener("click", pulseMonolith);
 scrambleBtn?.addEventListener("click", scrambleGlyphs);
 
@@ -306,6 +427,7 @@ glitchSlider?.addEventListener("input", updateGlitchIntensity);
 
 wireTracks();
 wireNavChips();
+wireProjectVault();
 
 // Default active nav item
 if (navChips.length) {

@@ -42,7 +42,7 @@
               <button class="chip-link nav-link" data-target="about-panel">
                 <span class="nav-link-label">ABOUT</span>
               </button>
-              <button class="chip-link nav-link" data-target="puzzles-panel">
+              <button class="chip-link nav-link" data-target="projects-vault-panel">
                 <span class="nav-link-label">PUZZLES</span>
               </button>
               <button class="chip-link nav-link" data-target="contact-panel">
@@ -209,7 +209,115 @@ K E V I N   W A N D E R // steel-core portfolio
           </div>
         </section>
 
-          <!-- Projects / Commands -->
+          <!-- Steel-core Project Vault -->
+          <section
+            class="panel panel-project-vault"
+            id="projects-vault-panel"
+            aria-label="Project vault"
+          >
+            <div class="panel-header">
+              <span class="title">
+                <span class="vault-header-label">latest projects</span>
+                <span class="vault-header-chevrons">≫≫</span>
+              </span>
+            </div>
+            <div class="panel-body vault-body">
+              <div class="vault-intro">
+                <span class="vault-label">steel-core puzzle feed</span>
+                <p class="vault-copy">
+                  Scroll through the latest interactive builds. Use the arrows to
+                  swap cartridges, then boot a project straight from the console.
+                </p>
+              </div>
+
+              <div class="vault-dashboard">
+                <button
+                  class="vault-arrow vault-arrow-left"
+                  type="button"
+                  aria-label="Previous project"
+                >
+                  ◀
+                </button>
+
+                <article
+                  class="vault-feature"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <header class="vault-feature-header">
+                    <span class="vault-feature-index">01</span>
+                    <h3 class="vault-feature-title">
+                      Head-to-Head Tic Tac Toe
+                    </h3>
+                    <span class="vault-feature-pill">puzzle</span>
+                  </header>
+                  <p class="vault-feature-tagline">
+                    Three-piece rotation twist on classic tic-tac-toe.
+                  </p>
+                  <p class="vault-feature-blurb">
+                    Oldest piece jumps off the board, so every move rewrites
+                    your attack and defense. Short games, lots of thinking.
+                  </p>
+                  <div class="vault-feature-meta">
+                    <span class="vault-chip">
+                      <span class="vault-chip-label">difficulty</span>
+                      <span class="vault-chip-value">Tactical</span>
+                    </span>
+                    <span class="vault-chip">
+                      <span class="vault-chip-label">built in</span>
+                      <span class="vault-chip-value">HTML · CSS · JS</span>
+                    </span>
+                  </div>
+                  <button class="btn neon vault-open-btn" type="button">
+                    <span>Open project</span>
+                  </button>
+                  <div class="vault-feature-path-row">
+                    <span class="vault-footer-label">path</span>
+                    <span class="vault-footer-path"
+                      >./tic-tac-toe/index.html</span
+                    >
+                  </div>
+                </article>
+
+                <button
+                  class="vault-arrow vault-arrow-right"
+                  type="button"
+                  aria-label="Next project"
+                >
+                  ▶
+                </button>
+              </div>
+
+              <div class="vault-dots" role="tablist" aria-label="Select project">
+                <!-- JS populates dots -->
+              </div>
+
+              <template id="vault-projects-template">
+                <div
+                  data-index="01"
+                  data-title="Head-to-Head Tic Tac Toe"
+                  data-tagline="Three-piece rotation twist on classic tic-tac-toe."
+                  data-blurb="Oldest piece jumps off the board, so every move rewrites your attack and defense."
+                  data-difficulty="Tactical"
+                  data-tech="HTML · CSS · JavaScript"
+                  data-link="tic-tac-toe/index.html"
+                  data-cmd="mount ./tic-tac-toe --mode head-to-head --pieces 3"
+                ></div>
+                <div
+                  data-index="02"
+                  data-title="2048 — Down-Right Edition"
+                  data-tagline="Directional twist on the classic 2048."
+                  data-blurb="Merges flow down and right, so greedy moves backfire fast. You have to plan escape routes."
+                  data-difficulty="Strategic"
+                  data-tech="HTML · CSS · JavaScript"
+                  data-link="2048/index.html"
+                  data-cmd="mount ./2048 --variant down-right --target 2048"
+                ></div>
+              </template>
+            </div>
+          </section>
+
+          <!-- Projects / Commands (legacy track list) -->
           <section class="panel panel-tracks" id="puzzles-panel">
           <div class="panel-header">
             <span class="title">/commands/projects.asc</span>
