@@ -210,6 +210,7 @@ body.core-ignited .steel-glow {
 
 .nav-rail-left {
   min-width: 0;
+  flex: 1;
 }
 
 .nav-rail-center {
@@ -220,6 +221,7 @@ body.core-ignited .steel-glow {
 .nav-rail-right {
   min-width: 0;
   justify-content: flex-end;
+  flex: 1;
 }
 
 .nav-brand {
@@ -243,9 +245,33 @@ body.core-ignited .steel-glow {
 }
 
 .nav-route {
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   color: #8b92c3;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.nav-route a {
+  color: var(--accent-soft);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.nav-route a:hover {
+  text-decoration: underline;
+}
+
+.nav-route-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #7f88b1;
+}
+
+.nav-route-separator {
+  opacity: 0.7;
 }
 
 .grid-left-column {
@@ -480,6 +506,10 @@ body.core-ignited .steel-glow {
   overflow: hidden;
 }
 
+.panel--hidden {
+  display: none;
+}
+
 .panel::before {
   content: "";
   position: absolute;
@@ -570,16 +600,14 @@ body.core-ignited .steel-glow {
   gap: 0.9rem;
 }
 
+/* Explicit IDs kept for clarity of layout; rules may be extended in the future */
 #about-panel {
-  /* part of left column flex container */
 }
 
 #terminal-panel {
-  /* part of right column flex container */
 }
 
 #puzzles-panel {
-  /* part of right column flex container */
 }
 
 #contact-panel {
@@ -588,11 +616,7 @@ body.core-ignited .steel-glow {
 
 /* Dynamic left-column overlay panel (e.g., contact box) */
 .left-column-overlay {
-  display: none;
   order: -1; /* appear before banner in flex order */
-}
-
-.left-column-overlay.visible {
   display: flex;
   animation: slideInOverlay 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
@@ -658,6 +682,8 @@ body.core-ignited .steel-glow {
   background: radial-gradient(circle at top left, #101322, #050609 70%);
   box-shadow: inset 0 0 0 1px rgba(62, 71, 115, 0.9);
   overflow-y: auto;
+  max-height: 200px;
+  min-height: 200px;
 }
 
 .terminal-stream .terminal-line {

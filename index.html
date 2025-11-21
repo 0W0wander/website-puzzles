@@ -25,7 +25,7 @@
           <div class="nav-ascii-row nav-ascii-top" aria-hidden="true">
             <span class="nav-ascii-corner">┌</span>
             <span class="nav-wire"></span>
-            <span class="nav-ascii-label">portfolio // navigation</span>
+            <span class="nav-ascii-label">main navigation</span>
             <span class="nav-wire"></span>
             <span class="nav-ascii-corner">┐</span>
           </div>
@@ -33,7 +33,7 @@
           <nav class="nav-rail" aria-label="Primary navigation">
             <div class="nav-rail-left">
               <span class="nav-brand">
-                KEVIN<span class="nav-brand-sub">// portfolio</span>
+                PORTFOLIO<span class="nav-brand-sub">// overview</span>
               </span>
               <span class="nav-pill">CS_GRAD@HUNTER</span>
             </div>
@@ -43,7 +43,7 @@
                 <span class="nav-link-label">ABOUT</span>
               </button>
               <button class="chip-link nav-link" data-target="projects-vault-panel">
-                <span class="nav-link-label">PUZZLES</span>
+                <span class="nav-link-label">PROJECTS</span>
               </button>
               <button class="chip-link nav-link" data-target="contact-panel">
                 <span class="nav-link-label">CONTACT</span>
@@ -52,7 +52,21 @@
 
             <div class="nav-rail-right">
               <span class="nav-route">
-                [ route: /profile → /projects → /contact ]
+                <span class="nav-route-label">github:</span>
+                <a
+                  href="https://github.com/0W0wander"
+                  target="_blank"
+                  rel="noreferrer"
+                  >0W0wander</a
+                >
+                <span class="nav-route-separator">|</span>
+                <span class="nav-route-label">linkedin:</span>
+                <a
+                  href="https://www.linkedin.com/in/william-k-03802a357/"
+                  target="_blank"
+                  rel="noreferrer"
+                  >william-k-03802a357</a
+                >
               </span>
             </div>
           </nav>
@@ -60,7 +74,7 @@
           <div class="nav-ascii-row nav-ascii-bottom" aria-hidden="true">
             <span class="nav-ascii-corner">└</span>
             <span class="nav-wire"></span>
-            <span class="nav-ascii-label">header online // sections ready</span>
+            <span class="nav-ascii-label">portfolio loaded — choose a section above</span>
             <span class="nav-wire"></span>
             <span class="nav-ascii-corner">┘</span>
           </div>
@@ -77,14 +91,14 @@
 ██╔═██╗ ██╔══╝  ╚██╗ ██╔╝██║██║╚██╗██║    ██║███╗██║██╔══██║██║╚██╗██║██║  ██║██╔══╝  ██╔══██╗
 ██║  ██╗███████╗ ╚████╔╝ ██║██║ ╚████║    ╚███╔███╔╝██║  ██║██║ ╚████║██████╔╝███████╗██║  ██║
 ╚═╝  ╚═╝╚══════╝  ╚═══╝  ╚═╝╚═╝  ╚═══╝     ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═╝  ╚═╝
-K E V I N   W A N D E R // computer science portfolio
+CS PROJECTS // SOFTWARE · DATA · INTERACTIVE PUZZLES
 </pre>
           </div>
 
           <!-- Profile / About -->
           <section class="panel panel-profile" id="about-panel">
           <div class="panel-header">
-            <span class="title">/profile/kevin.asc</span>
+            <span class="title">/profile/profile.asc</span>
             <div class="panel-actions">
               <span class="chip chip-hot">LIVE</span>
               <span class="chip chip-locked">NYC</span>
@@ -98,7 +112,7 @@ K E V I N   W A N D E R // computer science portfolio
                   src="resources/me.jpeg"
                   alt="Photo of Kevin Wander"
                 />
-                <figcaption>Kevin Wander // CS @ Hunter</figcaption>
+                <figcaption>CS Graduate // Software &amp; Data</figcaption>
               </figure>
               <figure class="profile-frame">
                 <img
@@ -111,10 +125,9 @@ K E V I N   W A N D E R // computer science portfolio
 
             <div class="about-description">
               <p>
-                Welcome! I'm <span class="accent">Kevin Wander</span>, a recent
-                computer science graduate from Hunter College (CUNY) with a
-                focus on building practical tools, data-driven apps, and
-                interactive experiences.
+                Welcome! I'm a recent computer science graduate from Hunter
+                College (CUNY) with a focus on building practical tools,
+                data-driven apps, and interactive experiences.
               </p>
               <p>
                 I work with <span class="accent">Python</span>,
@@ -131,8 +144,8 @@ K E V I N   W A N D E R // computer science portfolio
           </div>
         </section>
 
-          <!-- Controls + Contact -->
-          <section class="panel panel-console" id="contact-panel">
+          <!-- Controls + Contact (hidden on load, revealed via nav) -->
+          <section class="panel panel-console panel--hidden" id="contact-panel">
             <div class="panel-header">
               <span class="title">/controls/contact.cfg</span>
             </div>
@@ -176,18 +189,18 @@ K E V I N   W A N D E R // computer science portfolio
             <span class="dot red"></span>
             <span class="dot amber"></span>
             <span class="dot green"></span>
-            <span class="title">/terminal/kevin.log</span>
+            <span class="title">/terminal/profile.log</span>
           </div>
           <div class="panel-body">
             <div class="terminal-line">
               <span class="prompt">kevin@portfolio</span>
               <span class="chevron">≫</span>
-              <span class="cmd">cat about_kevin.asc</span>
+              <span class="cmd">cat profile.asc</span>
             </div>
             <div class="terminal-stream" id="terminal-stream">
               <pre class="ascii-art" id="ascii-art">
         .-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.
-        |   K E V I N   W A N D E R           |
+        |      SOFTWARE ENGINEERING PROFILE   |
  .-===-.|-------------------------------------|.-===-.
 |   \  |  B.A. CS, HUNTER COLLEGE (CUNY)    |  /   |
 |    \ |  PYTHON, C++, KOTLIN, SQL, JS      | /    |
@@ -213,9 +226,9 @@ K E V I N   W A N D E R // computer science portfolio
           </div>
         </section>
 
-          <!-- Steel-core Project Vault -->
+          <!-- Steel-core Project Vault (hidden on load, revealed via nav) -->
           <section
-            class="panel panel-project-vault"
+            class="panel panel-project-vault panel--hidden"
             id="projects-vault-panel"
             aria-label="Project vault"
           >
@@ -321,60 +334,6 @@ K E V I N   W A N D E R // computer science portfolio
             </div>
           </section>
 
-          <!-- Projects / Commands (legacy track list) -->
-          <section class="panel panel-tracks" id="puzzles-panel">
-          <div class="panel-header">
-            <span class="title">/commands/projects.asc</span>
-          </div>
-          <div class="panel-body tracks">
-            <button class="track" data-energy="INFO" data-role="about">
-              <span class="track-index">00</span>
-              <span class="track-name">"about kevin // profile"</span>
-              <span class="track-meta">
-                view background, skills, projects, and goals in the terminal
-              </span>
-              <span class="track-energy">ABOUT</span>
-            </button>
-            <button
-              class="track"
-              data-energy="MID"
-              data-link="tic-tac-toe/index.html"
-              data-cmd="open ./tic-tac-toe/index.html --mode head-to-head"
-            >
-              <span class="track-index">01</span>
-              <span class="track-name">"head-to-head tic tac toe"</span>
-              <span class="track-meta">
-                3 pieces per player // oldest piece respawns
-              </span>
-              <span class="track-energy">PROJECT</span>
-            </button>
-            <button
-              class="track"
-              data-energy="HIGH"
-              data-link="2048/index.html"
-              data-cmd="open ./2048/index.html --variant down-right"
-            >
-              <span class="track-index">02</span>
-              <span class="track-name">"2048 — down-right edition"</span>
-              <span class="track-meta">
-                merge tiles to reach 2048 // directional twist
-              </span>
-              <span class="track-energy">PROJECT</span>
-            </button>
-            <button
-              class="track"
-              data-energy="LOW"
-              data-role="contact"
-            >
-              <span class="track-index">03</span>
-              <span class="track-name">"contact kevin // open channel"</span>
-              <span class="track-meta">
-                open the contact console on the left
-              </span>
-              <span class="track-energy">CONTACT</span>
-            </button>
-          </div>
-        </section>
         </div>
       </section>
 
@@ -385,7 +344,7 @@ K E V I N   W A N D E R // computer science portfolio
           <span id="status-line">portfolio idle // ready to explore</span>
         </span>
         <span class="footer-text">
-          <span>Terminal-style portfolio designed and built by Kevin Wander.</span>
+          <span>Terminal-style portfolio designed and built with care.</span>
         </span>
       </footer>
     </main>

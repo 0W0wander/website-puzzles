@@ -21,7 +21,7 @@ const projectVaultPanel = qs("#projects-vault-panel");
 const baseAscii = asciiArt ? String(asciiArt.textContent) : "";
 
 const logQueue = [
-  "loading profile: KEVIN_WANDER",
+  "loading profile: candidate_profile",
   "education: B.A. Computer Science @ Hunter College (CUNY) // NYC",
   "languages: Python, C++, Kotlin, JavaScript, SQL",
   "projects: media tagger, stock analytics app, Roblox extension",
@@ -171,21 +171,26 @@ function printCommandToTerminal(commandText) {
   scrollTerminalToBottom();
 }
 
-// --- Left-column overlay panel (for contact, etc.) ---
-let leftColumnOverlay = null;
+// --- Left-column overlay panels (stackable for contact, about, projects, etc.) ---
+function createLeftColumnOverlay(mode = "contact") {
+  if (!leftColumn) return null;
 
-function ensureLeftColumnOverlay() {
-  if (leftColumnOverlay || !leftColumn) return leftColumnOverlay;
-
-  leftColumnOverlay = document.createElement("section");
-  leftColumnOverlay.className = "panel left-column-overlay";
+  const panel = document.createElement("section");
+  panel.className = "panel left-column-overlay";
 
   const header = document.createElement("div");
   header.className = "panel-header";
 
   const title = document.createElement("span");
   title.className = "title";
-  title.textContent = "/overlay/contact.asc";
+
+  if (mode === "about") {
+    title.textContent = "/profile/profile.asc";
+  } else if (mode === "projects") {
+    title.textContent = "/vault/latest-projects.asc";
+  } else {
+    title.textContent = "/controls/contact.cfg";
+  }
 
   const closeBtn = document.createElement("button");
   closeBtn.type = "button";
@@ -197,48 +202,58 @@ function ensureLeftColumnOverlay() {
   header.appendChild(closeBtn);
 
   const body = document.createElement("div");
-  body.className = "panel-body";
+  body.className = "panel-body overlay-body";
 
-  // Reuse the existing contact list markup for consistency
-  const sourceContactList = contactPanel?.querySelector(".contact-list");
-  if (sourceContactList) {
-    const clonedList = sourceContactList.cloneNode(true);
-    body.appendChild(clonedList);
+  if (mode === "about") {
+    const aboutBody = aboutPanel?.querySelector(".panel-body");
+    if (aboutBody) {
+      Array.from(aboutBody.children).forEach((child) => {
+        body.appendChild(child.cloneNode(true));
+      });
+    } else {
+      const fallback = document.createElement("p");
+      fallback.textContent = "loading profile...";
+      body.appendChild(fallback);
+    }
+  } else if (mode === "projects") {
+    const vaultBody = projectVaultPanel?.querySelector(".panel-body");
+    if (vaultBody) {
+      Array.from(vaultBody.children).forEach((child) => {
+        body.appendChild(child.cloneNode(true));
+      });
+      
+      // Re-wire the cloned vault controls after appending
+      setTimeout(() => {
+        wireClonedVault(body);
+      }, 0);
+    } else {
+      const fallback = document.createElement("p");
+      fallback.textContent = "loading latest projects feed...";
+      body.appendChild(fallback);
+    }
   } else {
-    const fallback = document.createElement("p");
-    fallback.textContent = "opening contact channel...";
-    body.appendChild(fallback);
+    const sourceContactList = contactPanel?.querySelector(".contact-list");
+    if (sourceContactList) {
+      const clonedList = sourceContactList.cloneNode(true);
+      body.appendChild(clonedList);
+    } else {
+      const fallback = document.createElement("p");
+      fallback.textContent = "opening contact channel...";
+      body.appendChild(fallback);
+    }
   }
 
-  leftColumnOverlay.appendChild(header);
-  leftColumnOverlay.appendChild(body);
+  panel.appendChild(header);
+  panel.appendChild(body);
 
-  // Prepend to left column (will appear first due to order: -1)
-  leftColumn.prepend(leftColumnOverlay);
+  // Prepend to left column so new panels stack on top
+  leftColumn.prepend(panel);
 
   closeBtn.addEventListener("click", () => {
-    hideLeftColumnOverlay();
+    panel.remove();
   });
 
-  return leftColumnOverlay;
-}
-
-function showLeftColumnOverlay() {
-  if (!leftColumn) return;
-
-  ensureLeftColumnOverlay();
-  if (!leftColumnOverlay) return;
-
-  // Trigger layout so transitions apply cleanly
-  void leftColumnOverlay.offsetHeight;
-
-  leftColumnOverlay.classList.add("visible");
-}
-
-function hideLeftColumnOverlay() {
-  if (!leftColumnOverlay) return;
-
-  leftColumnOverlay.classList.remove("visible");
+  return panel;
 }
 
 function wireTracks() {
@@ -251,7 +266,6 @@ function wireTracks() {
       track.addEventListener("click", () => {
         qsa(".track").forEach((t) => t.classList.remove("active"));
         track.classList.add("active");
-        hideLeftColumnOverlay();
         igniteCore();
       });
       return;
@@ -261,7 +275,7 @@ function wireTracks() {
       track.addEventListener("click", () => {
         qsa(".track").forEach((t) => t.classList.remove("active"));
         track.classList.add("active");
-        showLeftColumnOverlay();
+        createLeftColumnOverlay("contact");
       });
       return;
     }
@@ -287,18 +301,154 @@ function wireNavChips() {
   navChips.forEach((chip) => {
     chip.addEventListener("click", () => {
       const targetId = chip.dataset.target;
-      if (!targetId) return;
-      const panel = document.getElementById(targetId);
-      if (!panel) return;
       navChips.forEach((c) => c.classList.remove("active"));
       chip.classList.add("active");
-      panel.scrollIntoView({ behavior: "smooth", block: "center" });
-      mildGlitch(180);
+
+      if (!targetId) return;
+
+      // Map nav chips to overlay behaviors that mirror the tracks
+      if (targetId === "contact-panel") {
+        // CONTACT: create sliding overlay in the left column
+        createLeftColumnOverlay("contact");
+        printCommandToTerminal("nav contact --panel /controls/contact.cfg");
+        return;
+      }
+
+      if (targetId === "about-panel") {
+        // ABOUT: create sliding overlay with profile info
+        createLeftColumnOverlay("about");
+        printCommandToTerminal("nav about --panel /profile/profile.asc");
+        return;
+      }
+
+      // PROJECTS: create sliding overlay with projects vault
+      if (targetId === "projects-vault-panel") {
+        createLeftColumnOverlay("projects");
+        printCommandToTerminal("nav projects --panel /vault/latest-projects.asc");
+        return;
+      }
     });
   });
 }
 
 // --- Project Vault wiring ---
+
+function wireClonedVault(containerBody) {
+  const template = document.getElementById("vault-projects-template");
+  if (!template) return;
+
+  const projectNodes = Array.from(
+    template.content.querySelectorAll("[data-link]")
+  );
+  if (!projectNodes.length) return;
+
+  const projects = projectNodes.map((node) => ({
+    index: node.dataset.index || "",
+    title: node.dataset.title || "",
+    tagline: node.dataset.tagline || "",
+    blurb: node.dataset.blurb || "",
+    difficulty: node.dataset.difficulty || "",
+    tech: node.dataset.tech || "",
+    link: node.dataset.link || "",
+    cmd: node.dataset.cmd || "",
+  }));
+
+  const feature = containerBody.querySelector(".vault-feature");
+  const indexEl = feature?.querySelector(".vault-feature-index");
+  const titleEl = feature?.querySelector(".vault-feature-title");
+  const taglineEl = feature?.querySelector(".vault-feature-tagline");
+  const blurbEl = feature?.querySelector(".vault-feature-blurb");
+  const metaDifficultyEl = feature?.querySelector(
+    ".vault-chip:nth-child(1) .vault-chip-value"
+  );
+  const metaTechEl = feature?.querySelector(
+    ".vault-chip:nth-child(2) .vault-chip-value"
+  );
+  const pathEl = feature?.querySelector(".vault-footer-path");
+  const openBtn = feature?.querySelector(".vault-open-btn");
+  const leftArrow = containerBody.querySelector(".vault-arrow-left");
+  const rightArrow = containerBody.querySelector(".vault-arrow-right");
+  const dotsContainer = containerBody.querySelector(".vault-dots");
+
+  if (
+    !feature ||
+    !indexEl ||
+    !titleEl ||
+    !taglineEl ||
+    !blurbEl ||
+    !metaDifficultyEl ||
+    !metaTechEl ||
+    !pathEl ||
+    !openBtn ||
+    !leftArrow ||
+    !rightArrow ||
+    !dotsContainer
+  ) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  function renderProject(idx) {
+    const project = projects[idx];
+    if (!project) return;
+
+    indexEl.textContent = project.index;
+    titleEl.textContent = project.title;
+    taglineEl.textContent = project.tagline;
+    blurbEl.textContent = project.blurb;
+    metaDifficultyEl.textContent = project.difficulty;
+    metaTechEl.textContent = project.tech;
+    pathEl.textContent = project.link ? `./${project.link}` : "";
+
+    openBtn.onclick = () => {
+      if (project.cmd) {
+        printCommandToTerminal(project.cmd);
+      }
+      if (project.link) {
+        setTimeout(() => {
+          window.location.href = project.link;
+        }, 420);
+      }
+    };
+
+    Array.from(dotsContainer.children).forEach((dot, dotIdx) => {
+      dot.classList.toggle("active", dotIdx === idx);
+      dot.setAttribute("aria-selected", dotIdx === idx ? "true" : "false");
+    });
+  }
+
+  // Clear and rebuild dots
+  dotsContainer.innerHTML = "";
+  projects.forEach((project, idx) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "vault-dot";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", project.title || `Project ${project.index}`);
+    dot.addEventListener("click", () => {
+      currentIndex = idx;
+      renderProject(currentIndex);
+      mildGlitch(160);
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  leftArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex - 1 + projects.length) % projects.length;
+    renderProject(currentIndex);
+    mildGlitch(160);
+  });
+
+  rightArrow.addEventListener("click", () => {
+    currentIndex = (currentIndex + 1) % projects.length;
+    renderProject(currentIndex);
+    mildGlitch(160);
+  });
+
+  // Initial render
+  renderProject(currentIndex);
+}
 
 function wireProjectVault() {
   if (!projectVaultPanel) return;
